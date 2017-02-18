@@ -1,1 +1,1 @@
-ehco "hi";
+console.log("HI");
