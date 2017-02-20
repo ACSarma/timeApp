@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
