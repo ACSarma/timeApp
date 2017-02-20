@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    final TextView mTextView = (TextView) findViewById(R.id.text);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
