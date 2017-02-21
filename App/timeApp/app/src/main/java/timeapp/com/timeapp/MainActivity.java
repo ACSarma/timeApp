@@ -1,41 +1,41 @@
 package timeapp.com.timeapp;
 
-import android.app.DownloadManager;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.LinearLayout;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import static android.R.id.content;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
-    TextView text;
+    TextView text, text2;
+    RelativeLayout fragment;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -50,13 +50,12 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    final TextView mTextView = (TextView) findViewById(R.id.text);
+//    final TextView mTextView = (TextView) findViewById(R.id.section_label);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        text = (TextView) findViewById(R.id.text);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -81,29 +80,71 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void conn (View view){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HttpResponse response = null;
-                try {
-                    HttpClient client = new DefaultHttpClient();
-                    HttpGet request = new HttpGet();
-                    request.setURI(new URI("http://b3c8fe0d.ngrok.io/"));
-                    response = client.execute(request);
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                text.setText(response.toString());
-            }
-        });
+        // call AsynTask to perform network operation on separate thread
+        new HttpAsyncTask().execute("http://b3c8fe0d.ngrok.io/");
+    }
+    public static String GET(String url){
+        InputStream inputStream = null;
+        String result = "";
+        try {
+
+            // create HttpClient
+            HttpClient httpclient = new DefaultHttpClient();
+
+            // make GET request to the given URL
+            HttpResponse httpResponse = httpclient.execute(new HttpGet(url));
+
+            // receive response as inputStream
+            inputStream = httpResponse.getEntity().getContent();
+
+            // convert inputstream to string
+            if(inputStream != null)
+                result = convertInputStreamToString(inputStream);
+            else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+
+        return result;
+    }
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException{
+        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while((line = bufferedReader.readLine()) != null)
+            result += line;
+
+        inputStream.close();
+        return result;
 
     }
+
+    public boolean isConnected(){
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected())
+            return true;
+        else
+            return false;
+    }
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return GET(urls[0]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
