@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "CONNECTED TO NODES", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
             Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
         }
     }
