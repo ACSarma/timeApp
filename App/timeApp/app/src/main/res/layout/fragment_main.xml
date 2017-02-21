@@ -8,7 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="timeapp.com.timeapp.MainActivity$PlaceholderFragment">
 
-<<<<<<< HEAD
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
@@ -26,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:onClick="conn"
         android:text="Conn"/>
-=======
+
     <LinearLayout
         android:id="@+id/custom_buttom"
         android:layout_width="100dp"
