@@ -8,6 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="timeapp.com.timeapp.MainActivity$PlaceholderFragment">
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
@@ -25,4 +26,38 @@
         android:layout_centerHorizontal="true"
         android:onClick="conn"
         android:text="Conn"/>
+=======
+    <LinearLayout
+        android:id="@+id/custom_buttom"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/shape_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="109dp">
+
+        <!-- Beer icon and all other stuff -->
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/shape_button" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/do_nothing"
+        android:layout_width="85dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="-50dp"
+        android:background="@drawable/shape_buttton_mask"
+        android:soundEffectsEnabled="false"
+        android:layout_marginStart="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/custom_buttom"
+        android:layout_marginTop="56dp">
+    </ImageView>
+>>>>>>> origin/master
 </RelativeLayout>
