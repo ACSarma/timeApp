@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements
         // [START auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
+<<<<<<< HEAD
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
@@ -73,6 +74,11 @@ public class MainActivity extends AppCompatActivity implements
                 // [START_EXCLUDE]
                 //updateUI(user);
                 // [END_EXCLUDE]
+=======
+            public void onClick(View view) {
+                Snackbar.make(view, "CONNECTED TO NODES", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+>>>>>>> origin/master
             }
         };
         // [END auth_state_listener]
@@ -198,6 +204,7 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             mEmailField.setError(null);
         }
+<<<<<<< HEAD
 
         String password = mPasswordField.getText().toString();
         if (TextUtils.isEmpty(password)) {
@@ -205,6 +212,13 @@ public class MainActivity extends AppCompatActivity implements
             valid = false;
         } else {
             mPasswordField.setError(null);
+=======
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            //Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+>>>>>>> origin/master
         }
 
         return valid;
