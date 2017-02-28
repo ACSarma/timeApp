@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "281481761835",
+    "firebase_url": "https://timeapp-dd8fb.firebaseio.com",
+    "project_id": "timeapp-dd8fb",
+    "storage_bucket": "timeapp-dd8fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281481761835:android:f32a6976763f4b01",
+        "android_client_info": {
+          "package_name": "timeapp.com.timeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281481761835-j99team6rv74r93qpkf3gvitm4t5mlv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADEMnv2mLVFV08XJUFoqNIJA9kKWn63Oc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
