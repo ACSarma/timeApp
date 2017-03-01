@@ -1,7 +1,9 @@
 package timeapp.com.timeapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -61,24 +63,24 @@ public class MainActivity extends AppCompatActivity implements
         // [START auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-<<<<<<< HEAD
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    nextActivity();
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
+                    Toast.makeText(getBaseContext(), "ERROR; Arun's Fault", Toast.LENGTH_LONG).show();
+                }}
                 // [START_EXCLUDE]
                 //updateUI(user);
                 // [END_EXCLUDE]
-=======
+
             public void onClick(View view) {
                 Snackbar.make(view, "CONNECTED TO NODES", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
->>>>>>> origin/master
             }
         };
         // [END auth_state_listener]
@@ -204,7 +206,6 @@ public class MainActivity extends AppCompatActivity implements
         } else {
             mEmailField.setError(null);
         }
-<<<<<<< HEAD
 
         String password = mPasswordField.getText().toString();
         if (TextUtils.isEmpty(password)) {
@@ -212,17 +213,15 @@ public class MainActivity extends AppCompatActivity implements
             valid = false;
         } else {
             mPasswordField.setError(null);
-=======
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
+            // onPostExecute displays the results of the AsyncTask.
+        }
+        return valid;
+    }
+        //@Override
         protected void onPostExecute(String result) {
             //Toast.makeText(getBaseContext(), "Received!", Toast.LENGTH_LONG).show();
             Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
->>>>>>> origin/master
         }
-
-        return valid;
-    }
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
@@ -244,6 +243,14 @@ public class MainActivity extends AppCompatActivity implements
             sendEmailVerification();
         }
     }
+
+    public void nextActivity(){
+        Intent intent = new Intent(this, UserHome.class);
+        startActivity(intent);
+
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
