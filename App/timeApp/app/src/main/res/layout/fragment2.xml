@@ -8,35 +8,33 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="timeapp.com.timeapp.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="timeapp.com.timeapp.MainActivity">
 
     <EditText
-        android:id="@+id/user"
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
         android:hint="USERNAME"
         android:gravity="center" />
 
     <EditText
-        android:id="@+id/pass"
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="PASSWORD"
         android:gravity="center"
-        android:layout_below="@+id/user"/>
+        android:layout_below="@+id/username"/>
     <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LOG IN"
-        android:layout_below="@+id/pass"/>
+        android:layout_below="@+id/password"/>
     <Button
         android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pass"
+        android:layout_below="@+id/password"
         android:text="REGISTER"
         android:layout_alignParentEnd="true"/>
 </RelativeLayout>
