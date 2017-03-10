@@ -13,8 +13,29 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class Welcome extends Activity {
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import timeapp.com.timeapp.R;
+import timeapp.com.timeapp.Fragment1;
+import timeapp.com.timeapp.Fragment2;
+import timeapp.com.timeapp.Fragment3;
+
+import static timeapp.com.timeapp.R.id.info;
+
+public class Welcome extends AppCompatActivity {
+    private  Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     // Declare Variable
     Button logout;
 
@@ -24,29 +45,52 @@ public class Welcome extends Activity {
         // Get the view from singleitemview.xml
         setContentView(R.layout.welcome);
 
-        // Retrieve current user from Parse.com
-        ParseUser currentUser = ParseUser.getCurrentUser();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
-        // Convert currentUser into String
-        String struser = currentUser.getUsername().toString();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
 
-        // Locate TextView in welcome.xml
-        TextView txtuser = (TextView) findViewById(R.id.txtuser);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-        // Set the currentUser String into TextView
-        txtuser.setText("You are logged in as " + struser);
+    }
 
-        // Locate Button in welcome.xml
-        logout = (Button) findViewById(R.id.logout);
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new Fragment1(), "ONE");
+        adapter.addFragment(new Fragment2(), "TWO");
+        adapter.addFragment(new Fragment3(), "THREE");
+        viewPager.setAdapter(adapter);
+    }
 
-        // Logout Button Click Listener
-        logout.setOnClickListener(new OnClickListener() {
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
-            public void onClick(View arg0) {
-                // Logout current user
-                ParseUser.logOut();
-                finish();
-            }
-        });
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 }
