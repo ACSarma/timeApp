@@ -18,6 +18,12 @@ app.get('/', function (req, res) {
   console.log(a, "connection");
 })
 
+app.get('/json', function (req, res) {
+  res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ a: 1 }, null, 3));
+  console.log(a, "JSON Res sent");
+})
+
 app.listen(3000, function () {
   console.log('Listening to port 3000!')
 })
